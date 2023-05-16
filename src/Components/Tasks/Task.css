@@ -1,0 +1,11 @@
+.taskDetails{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding: 1em;
+    background-color: rgb(0 237 255);
+    border-radius: 12px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    margin: 1em auto;
+}
+
