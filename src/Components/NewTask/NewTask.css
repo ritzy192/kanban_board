@@ -1,0 +1,5 @@
+.newForm{
+    margin: 0rem 20em;
+    display: flex;
+    flex-direction: column;
+}
