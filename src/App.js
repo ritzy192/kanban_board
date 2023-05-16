@@ -1,6 +1,6 @@
 import "./App.css";
-import TaskCard from "../src/Components/TaskCard/TaskCard";
-import "./Components/TaskCard/TaskCard.css";
+import StatusTypeCard from "../src/Components/StatusTypeCard/StatusTypeCard";
+import "./Components/StatusTypeCard/StatusTypeCard.css";
 import { useState } from "react";
 import NewTask from "./Components/NewTask/NewTask";
 
@@ -24,7 +24,7 @@ function App() {
     },
   ];
 
-  const taskList = [
+  const dummyTaskList = [
     {
       title: "Create demo",
       status: 0,
@@ -52,35 +52,43 @@ function App() {
     },
   ];
 
-  const tasksWithTypelist = taskTypeList.reduce((acc, curr) => {
-    const filteredTasks = taskList.filter((task) => {
-      return task.status === curr.status;
-    });
-    return [
-      ...acc,
-      {
-        ...curr,
-        tasks: filteredTasks,
-      },
-    ];
-  }, []);
+  // const tasksWithTypelist = taskTypeList.reduce((acc, curr) => {
+  //   const filteredTasks = taskList.filter((task) => {
+  //     return task.status === curr.status;
+  //   });
+  //   return [
+  //     ...acc,
+  //     {
+  //       ...curr,
+  //       tasks: filteredTasks,
+  //     },
+  //   ];
+  // }, []);
 
-  const [finalList, setFinallist] = useState(tasksWithTypelist);
+  const [finalTaskList, setFinalTaskList] = useState(dummyTaskList);
+
+  // const newTaskHandler = (task) => {
+  //   const newTask = { title: task.title, status: 0, storyPoint: 0 };
+  //   const updatedTaskList = [...finalTaskList];
+  //   const typeIndex = updatedTaskList.findIndex((item) => {
+  //     return item.status === 0;
+  //   });
+  //   const updatedTasks = [...updatedTaskList[typeIndex].tasks, newTask];
+  //   updatedTaskList[typeIndex] = {
+  //     ...updatedTaskList[typeIndex],
+  //     tasks: updatedTasks,
+  //   };
+
+  //   console.log("******* ", updatedTaskList);
+  //   setFinallist(updatedTaskList);
+  // };
 
   const newTaskHandler = (task) => {
-    const newTask = { title: task.title, status: 0, storyPoint: 0 };
-    const updatedTaskList = [...finalList];
-    const typeIndex = updatedTaskList.findIndex((item) => {
-      return item.status === 0;
-    });
-    const updatedTasks = [...updatedTaskList[typeIndex].tasks, newTask];
-    updatedTaskList[typeIndex] = {
-      ...updatedTaskList[typeIndex],
-      tasks: updatedTasks,
-    };
-
-    console.log("******* ", updatedTaskList);
-    setFinallist(updatedTaskList);
+    console.log("New Task = ", task);
+    const updatedTaskList = [...finalTaskList];
+    updatedTaskList.push({ title: task.title, status: 0, storyPoint: task.storyPnt });
+    //console.log("Updated list ", updatedTaskList);
+    setFinalTaskList(updatedTaskList);
   };
 
   return (
@@ -90,8 +98,14 @@ function App() {
       </header>
       <NewTask createTask={newTaskHandler}></NewTask>
       <div className="cardDiv">
-        {finalList.map((item) => (
-          <TaskCard className="taskTypeCards" taskList={item}></TaskCard>
+        {taskTypeList.map((item) => (
+          <StatusTypeCard
+            className="taskTypeCards"
+            taskTypeList={item}
+            taskList={finalTaskList.filter((task) => {
+              return task.status === item.status;
+            })}
+          ></StatusTypeCard>
         ))}
       </div>
     </div>
