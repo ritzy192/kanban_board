@@ -1,0 +1,14 @@
+.noTaskMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+  }
+  
+  .noTaskMessage p {
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+  }
+  
