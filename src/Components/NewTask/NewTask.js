@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import '../NewTask/NewTask.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../NewTask/NewTask.css";
 
 const NewTask = (props) => {
   const [taskTitle, setTaskTitle] = useState("");
@@ -14,7 +14,7 @@ const NewTask = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTask = { title: taskTitle, storyPnt: 0 };
-    setTaskTitle('')
+    setTaskTitle("");
     props.createTask(newTask);
   };
   return (
