@@ -26,31 +26,39 @@ function App() {
 
   const dummyTaskList = [
     {
+      id: 1,
       title: "Create demo",
       status: 0,
       storyPoint: 4,
     },
     {
+      id: 2,
       title: "Get Details from team A",
       status: 1,
       storyPoint: 2,
     },
     {
+      id: 3,
       title: "Add Payment Gateway",
       status: 0,
       storyPoint: 5,
     },
     {
+      id: 4,
       title: "Create Task improvement",
       status: 2,
       storyPoint: 1,
     },
     {
+      id: 5,
       title: "task 2 to be done",
       status: 3,
       storyPoint: 1,
     },
   ];
+
+  const [finalTaskList, setFinalTaskList] = useState(dummyTaskList);
+  const [newId, setNewId] = useState(dummyTaskList.length + 1);
 
   // const tasksWithTypelist = taskTypeList.reduce((acc, curr) => {
   //   const filteredTasks = taskList.filter((task) => {
@@ -64,8 +72,6 @@ function App() {
   //     },
   //   ];
   // }, []);
-
-  const [finalTaskList, setFinalTaskList] = useState(dummyTaskList);
 
   // const newTaskHandler = (task) => {
   //   const newTask = { title: task.title, status: 0, storyPoint: 0 };
@@ -86,9 +92,59 @@ function App() {
   const newTaskHandler = (task) => {
     console.log("New Task = ", task);
     const updatedTaskList = [...finalTaskList];
-    updatedTaskList.push({ title: task.title, status: 0, storyPoint: task.storyPnt });
+    updatedTaskList.push({
+      id: newId,
+      title: task.title,
+      status: 0,
+      storyPoint: task.storyPnt,
+    });
+    setNewId(newId + 1);
     //console.log("Updated list ", updatedTaskList);
     setFinalTaskList(updatedTaskList);
+  };
+
+  const taskEventHandler = (taskObject) => {
+    console.log(" from taskEvent Handler ", taskObject);
+    const { id, operation } = taskObject;
+    switch (operation) {
+      case "promote":
+        promoteTask(id);
+        break;
+      case "demote":
+        demoteTask(id);
+        break;
+      default:
+        deleteTask(id);
+        break;
+    }
+  };
+
+  const deleteTask = (id) => {
+    console.log("inside delete task method");
+    let updatedList = [...finalTaskList];
+    updatedList = updatedList.filter((task) => task.id !== id);
+    console.log("updated list ", updatedList);
+    setFinalTaskList(updatedList);
+  };
+
+  const promoteTask = (id) => {
+    let updatedList = [...finalTaskList];
+    const updatedArray = updatedList.map((task) => {
+      if (task.id === id && task.status < taskTypeList.length - 1)
+        return { ...task, status: task.status + 1 };
+      return task;
+    });
+    setFinalTaskList(updatedArray);
+  };
+
+  const demoteTask = (id) => {
+    let updatedList = [...finalTaskList];
+    const updatedArray = updatedList.map((task) => {
+      if (task.id === id && task.status > 0)
+        return { ...task, status: task.status - 1 };
+      return task;
+    });
+    setFinalTaskList(updatedArray);
   };
 
   return (
@@ -101,7 +157,9 @@ function App() {
         {taskTypeList.map((item) => (
           <StatusTypeCard
             className="taskTypeCards"
+            key={item.status}
             taskTypeList={item}
+            handleTaskEvent={taskEventHandler}
             taskList={finalTaskList.filter((task) => {
               return task.status === item.status;
             })}

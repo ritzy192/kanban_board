@@ -9,3 +9,8 @@
     margin: 1em auto;
 }
 
+.disabled-icon {
+  opacity: 0.5;
+  pointer-events: none; 
+}
+
