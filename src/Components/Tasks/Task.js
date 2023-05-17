@@ -44,15 +44,15 @@ const Task = (props) => {
           }}
         />
         <FontAwesomeIcon
+          icon={faTrash}
+          shake
+          onClick={() => handleDelete(task)}
+        />
+        <FontAwesomeIcon
           icon={faCircleArrowRight}
           shake
           className={isPromoteDisabled ? "disabled-icon" : ""}
           onClick={() => handlePromote(task)}
-        />
-        <FontAwesomeIcon
-          icon={faTrash}
-          shake
-          onClick={() => handleDelete(task)}
         />
       </div>
     </div>
