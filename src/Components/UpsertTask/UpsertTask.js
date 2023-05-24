@@ -7,8 +7,7 @@ function UpsertTask(props) {
   let { id, title } = props.task;
   const [show, setShow] = useState(true);
   const [taskTitle, setTaskTitle] = useState(title);
-  const handleClose = (e) => {
-    e.preventDefault();
+  const handleClose = () => {
     setShow(false);
     props.closeModal();
   };
@@ -27,7 +26,7 @@ function UpsertTask(props) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onSubmit={handleSaveChanges} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Task</Modal.Title>
         </Modal.Header>
