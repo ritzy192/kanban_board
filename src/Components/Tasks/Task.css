@@ -21,8 +21,8 @@
   }
   
   .taskDetails svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     margin-left: 10px;
     cursor: pointer;
   }
@@ -30,6 +30,7 @@
   .taskDetails svg.disabled-icon {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
   }
   
   .taskDetails svg.fa-shake:hover {

@@ -28,7 +28,7 @@ function App() {
     {
       id: 1,
       title: "Create demo",
-      status: 0,
+      status: 2,
       storyPoint: 4,
     },
     {
@@ -90,7 +90,6 @@ function App() {
   // };
 
   const newTaskHandler = (task) => {
-    console.log("New Task = ", task);
     const updatedTaskList = [...finalTaskList];
     updatedTaskList.push({
       id: newId,
@@ -104,26 +103,26 @@ function App() {
   };
 
   const taskEventHandler = (taskObject) => {
-    console.log(" from taskEvent Handler ", taskObject);
-    const { id, operation } = taskObject;
+    const { task, operation } = taskObject;
     switch (operation) {
       case "promote":
-        promoteTask(id);
+        promoteTask(task.id);
         break;
       case "demote":
-        demoteTask(id);
+        demoteTask(task.id);
+        break;
+      case "edit":
+        editTask(task);
         break;
       default:
-        deleteTask(id);
+        deleteTask(task.id);
         break;
     }
   };
 
   const deleteTask = (id) => {
-    console.log("inside delete task method");
     let updatedList = [...finalTaskList];
     updatedList = updatedList.filter((task) => task.id !== id);
-    console.log("updated list ", updatedList);
     setFinalTaskList(updatedList);
   };
 
@@ -146,6 +145,16 @@ function App() {
     });
     setFinalTaskList(updatedArray);
   };
+
+  const editTask =(updatedTask) => {
+    let updatedList = [...finalTaskList];
+    const updatedArray = updatedList.map((task) => {
+      if (task.id === updatedTask.id)
+        return { ...task, title: updatedTask.title };
+      return task;
+    });
+    setFinalTaskList(updatedArray);
+  }
 
   return (
     <div className="App">
