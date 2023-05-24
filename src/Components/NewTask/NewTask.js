@@ -13,31 +13,13 @@ const NewTask = (props) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (taskTitle.length === 0) return;
     const newTask = { title: taskTitle, storyPnt: 0 };
     setTaskTitle("");
     props.createTask(newTask);
   };
   return (
     <Form onSubmit={handleSubmit} className="newForm">
-      {/* <label htmlFor="taskTitle"></label>
-      <input type="text" id="taskTitle" name="taskTitle" />
-      <label htmlFor="Description">Description:</label>
-        <input
-          type="text"
-          id="description"
-          name="Description"
-          value={Description}
-          onChange={handleDescriptionChange}
-        />
-        <label htmlFor="StoryPoint">StoryPoint:</label>
-        <input
-          type="text"
-          id="StoryPoint"
-          name="StoryPoint"
-          value={StoryPoint}
-          onChange={handleStoryPointChange}
-        /> */}
-
       <Form.Group className="mb-3" controlId="formBasicEmail">
         {/* <Form.Label>Type Title</Form.Label> */}
         <Form.Control
@@ -50,9 +32,19 @@ const NewTask = (props) => {
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         Add Task
       </Button>
-
-      {/* <Button onClick={handleSubmit}>Add Task</Button> */}
     </Form>
+    // <>
+    // <label htmlFor="taskTitle"></label>
+    //   <label htmlFor="Title">title:</label>
+    //     <input
+    //       type="text"
+    //       id="title"
+    //       name="Title"
+    //       value={taskTitle}
+    //       onChange={handleTaskTitleChange}
+    //     />
+    //     <Button onClick={handleSubmit}>Add Task</Button>
+    // </>
   );
 };
 
