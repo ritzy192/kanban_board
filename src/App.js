@@ -165,7 +165,6 @@ function App() {
       <div className="cardDiv">
         {taskTypeList.map((item) => (
           <StatusTypeCard
-            className="taskTypeCards"
             key={item.status}
             taskTypeList={item}
             handleTaskEvent={taskEventHandler}

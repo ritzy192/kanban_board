@@ -65,12 +65,12 @@ const Task = (props) => {
           />
           <FontAwesomeIcon
             icon={faTrash}
-            shake
+            
             onClick={() => handleDelete(task)}
           />
           <FontAwesomeIcon
             icon={faPencil}
-            shake
+            
             onClick={() => handleEditTask(task)}
           />
           <FontAwesomeIcon

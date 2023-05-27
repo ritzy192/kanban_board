@@ -1,5 +1,10 @@
-.newForm{
-    margin: 0rem 20em;
-    display: flex;
-    flex-direction: column;
-}
+.newForm {
+    max-width: 25rem; 
+  width: 100%;
+  margin: 2em auto;
+  }
+  
+  .newForm .btn-primary {
+    width: 100%;
+  }
+  
